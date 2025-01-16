@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="pfp.jpg" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('imgvid.jpg') center/cover fixed;
+            color: white;
+        }
+
+        .profile-card {
+            background: rgba(32, 32, 32, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            max-width: 400px;
+            width: 90%;
+            margin: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid #404040;
+            transition: transform 0.3s ease; /* Created by yoru.fr */
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            color: #888;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+            padding: 0.5rem;
+        }
+
+        .badge {
+            background: rgba(60, 60, 60, 0.5);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #404040;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            background: rgba(80, 80, 80, 0.7);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .link-button {
+            padding: 0.8rem 1.5rem;
+            background: rgba(60, 60, 60, 0.5);
+            border: 1px solid #404040;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+/* Created by yoru.fr */
+        .link-button:hover {
+            background: rgba(80, 80, 80, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(32, 32, 32, 0.8);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+/* Created by yoru.fr */
+        .audio-controls:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .badges-container {
+                gap: 0.3rem;
+            }
+
+            .badge {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+
+            .link-button {
+                padding: 0.6rem 1rem;
+            }
+
+            .audio-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <img src="pfp.jpg" alt="Profile" class="profile-image">
+        <div class="name">Yoru <sup>†</sup></div>
+        <div class="title">Developer & Designer</div>
+        
+        <div class="badges-container">
+            <a href="https://ngl.link/xap.js" style="text-decoration: none; color:white ;"><div class="badge">NGL</div></a>
+        </div>
+
+        <div class="social-links">
+            <a href="https://instagram.com/xap.js" class="link-button" target="_blank">
+                <i class="fab fa-instagram"></i>
+                Instagram
+            </a>
+            <a href="https://www.snapchat.com/add/xap.js?share_id=wGKlgT61cJo&locale=en-MM" class="link-button" target="_blank">
+                <i class="fab fa-snapchat"></i>
+                Snapchat
+            </a>
+            <a href="https://discordapp.com/users/724859474820464682" class="link-button" target="_blank">
+                <i class="fab fa-discord"></i>
+                Discord
+            </a>
+            <a href="https://open.spotify.com/user/31gl3nyzeybg7otzjjzxcq6rsh2e?si=U_dJgtTKTVyfLMx98Zo4YQ" class="link-button" target="_blank">
+                <i class="fab fa-spotify"></i>
+                Spotify
+            </a>
+        </div>
+    </div>
+
+    <div class="audio-controls">
+        <i class="fas fa-volume-up" id="audioToggle"></i>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        /* Created by yoru.fr */
+        const audio = document.getElementById('bgMusic');
+        const audioToggle = document.getElementById('audioToggle');
+        let isPlaying = false;
+
+        /* Created by yoru.fr */
+        document.addEventListener('click', function() {
+            if (!isPlaying) {
+                audio.play();
+                isPlaying = true;
+                audioToggle.className = 'fas fa-volume-up';
+            }
+        }, { once: true });
+
+        audioToggle.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                audioToggle.className = 'fas fa-volume-mute';
+            } else {
+                audio.play();
+                audioToggle.className = 'fas fa-volume-up';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        /* Created by yoru.fr */
+        document.querySelectorAll('.link-button').forEach(button => {
+            button.addEventListener('mouseover', () => {
+                button.style.transform = 'translateY(-2px)';
+            });
+            button.addEventListener('mouseout', () => {
+                button.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
